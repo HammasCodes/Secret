@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(-45deg, #7d007d, #ff4d4d, #ff99cc, #cc00cc);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 3px solid #ff4d4d;
+            text-align: center;
+            overflow: hidden;
+            font-family: 'Dancing Script', cursive;
+        }
+        .heart {
+            color: red;
+            font-size: 60px;
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        .message {
+            font-size: 22px;
+            margin-top: 15px;
+            color: #7d007d;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+        .flower {
+            width: 80%;
+            max-width: 200px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background-color: #cc0000;
+        }
+        .heart-fall {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            top: 0;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .popup-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 22px;
+            color: #ff4d4d;
+            font-family: 'Dancing Script', cursive;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: explode 1s ease-out;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        @media (max-width: 600px) {
+            .heart {
+                font-size: 40px;
+            }
+            .message {
+                font-size: 1.2rem;
+            }
+            .button {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+            .popup-message {
+                font-size: 1.2rem;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Auto-Playing Music (Muted Initially) -->
+    <audio id="loveSong" autoplay loop muted>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="card" id="card">
+        <div class="heart">❤️</div>
+        <h2 style="color: #ff4d4d;">Happy Valentine's Day!</h2>
+        <p class="message">To my Zuzu, My hotheaded sweet cutie this is for you from your Ashiq(Hammas) hehehe  💕</p>
+        <img class="flower" src="https://pngimg.com/uploads/bouquet/bouquet_PNG63.png" alt="Bouquet">
+        <br>
+        <button class="button" onclick="unmuteSong(); showMessage(); triggerFireworks();">Zuzu click it <3 </button>
+    </div>
+    
+    <div class="popup-message" id="popupMessage">My Love, you are the light in my life, the joy in my heart, and the reason for my happiest moments,no matter whatever we are going to fave ahead i promise my hand always hold yours,Zuzu you are not just my love you're my motivation,you're my comfort place,you're my beloved, My dream is to spend a home of happiness with you where there is no negativity,no hatred there will be only peace,love, happiness just you and me sharing our hearts with each other.Meri jaan I love you
+        like the stars love the night,like a swan loves the lake,like a violin loves its bow,like a paintbrush loves the canvas,like a book loves the reader,like the sun loves to rise,like a heart loves to heal ,like the soul loves to be free.</div>
+
+    <script>
+        function createFallingHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart-fall");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createFallingHeart, 300);
+
+        function showMessage() {
+            const message = document.getElementById("popupMessage");
+            message.style.display = "block";
+            setTimeout(() => { message.style.display = "none"; }, 100000000000);
+        }
+
+        function triggerFireworks() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 100);
+            }
+        }
+
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            firework.style.left = Math.random() * 100 + "vw";
+            firework.style.top = Math.random() * 100 + "vh";
+            document.body.appendChild(firework);
+            setTimeout(() => { firework.remove(); }, 3000);
+        }
+
+        function unmuteSong() {
+            const song = document.getElementById("loveSong");
+            song.muted = false;
+            song.play();
+        }
+    </script> 
+
+</body>
+</html>
